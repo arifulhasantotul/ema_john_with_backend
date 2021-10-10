@@ -14,13 +14,13 @@ In the project directory, you can run:
 4. initialize firebase
 5. enable auth method
 
-### `Step-2: `
+### `Step-2: Setup component `
 
 1.Create login component
 2.Create register component
 3.Create Route for login and register
 
-### `Step-3`
+### `Step-3: set Auth system`
 
 1. set up sign in method
 2. set up sign out method
@@ -28,39 +28,15 @@ In the project directory, you can run:
 4. special observer
 5. return necessary methods and states from firebase
 
-### `Step-4`
+### `Step-4: create auth context hook (useAuth`
 
 1. create a auth context
 2. create context Provider
-3. use Auth Provider
-4. create useAuth Hook
+3. set context Provider value
+4. use Auth Provider
+5. create useAuth Hook
 
-## Learn More
+## `Step-5: create private route`
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+1. create private Route
+   2.set private route
