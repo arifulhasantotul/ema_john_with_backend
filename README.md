@@ -27,7 +27,7 @@ In the project directory, you can run:
 3. user state changed
 4. special observer
 
-### `yarn eject`
+### `Step-4`
 
 **Note: this is a one-way operation. Once you `eject`, you can’t go back!**
 
