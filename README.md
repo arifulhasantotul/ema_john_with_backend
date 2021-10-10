@@ -28,7 +28,7 @@ In the project directory, you can run:
 4. special observer
 5. return necessary methods and states from firebase
 
-### `Step-4: create auth context hook (useAuth`
+### `Step-4: create auth context hook (useAuth)`
 
 1. create a auth context
 2. create context Provider
