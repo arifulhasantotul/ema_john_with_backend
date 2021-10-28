@@ -1,6 +1,7 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import useAuth from "../../hooks/useAuth";
+import { clearTheCart, getStoredCart } from "../../utilities/fakedb";
 import "./Shipping.css";
 
 const Shipping = () => {
@@ -8,9 +9,30 @@ const Shipping = () => {
    const {
       register,
       handleSubmit,
+      reset,
       formState: { errors },
    } = useForm();
-   const onSubmit = (data) => console.log(data);
+   const onSubmit = (data) => {
+      const savedCart = getStoredCart();
+      data.order = savedCart;
+      // console.log(data);
+      fetch("https://pure-escarpment-22232.herokuapp.com/orders", {
+         method: "POST",
+         headers: {
+            "content-type": "application/json",
+         },
+         body: JSON.stringify(data),
+      })
+         .then((res) => res.json())
+         .then((result) => {
+            console.log(result);
+            if (result.insertedId) {
+               alert("Order processed successfully");
+               clearTheCart();
+               reset();
+            }
+         });
+   };
    return (
       <div>
          {/* "handleSubmit" will validate your inputs before invoking "onSubmit"
@@ -37,30 +59,30 @@ const Shipping = () => {
             <input
                placeholder="mobile"
                defaultValue=""
-               {...register("numberRequired", { required: true })}
+               {...register("number", { required: true })}
             />
             {/* errors will return when field validation fails  */}
-            {errors.numberRequired && (
+            {errors.number && (
                <span className="error">This field is required</span>
             )}
             {/* include validation with required or other standard HTML validation rules */}
             <input
                placeholder="address"
                defaultValue=""
-               {...register("addressRequired", { required: true })}
+               {...register("address", { required: true })}
             />
             {/* errors will return when field validation fails  */}
-            {errors.addressRequired && (
+            {errors.address && (
                <span className="error">This field is required</span>
             )}
             {/* include validation with required or other standard HTML validation rules */}
             <input
                placeholder="city"
                defaultValue=""
-               {...register("cityRequired", { required: true })}
+               {...register("city", { required: true })}
             />
             {/* errors will return when field validation fails  */}
-            {errors.cityRequired && (
+            {errors.city && (
                <span className="error">This field is required</span>
             )}
 

@@ -1,25 +1,36 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import useCart from "../../hooks/useCart";
+import { addToDb } from "../../utilities/fakedb";
 import Cart from "../Cart/Cart";
 import Product from "../Product/Product";
-import { addToDb } from "../../utilities/fakedb";
 import "./Shop.css";
-import useCart from "../../hooks/useCart";
-import { Link } from "react-router-dom";
 
 const Shop = () => {
    const [products, setProducts] = useState([]);
-   const [cart, setCart] = useCart(products);
+   const [searchProducts, setSearchProducts] = useState([]);
+   const [cart, setCart] = useCart();
+   const [page, setPage] = useState(0);
+   const [pageCount, setPageCount] = useState(0);
    // products to be rendered on the UI
-   const [displayProducts, setDisplayProducts] = useState([]);
+   const size = 10;
 
    useEffect(() => {
-      fetch("./products.json")
+      // fakedata
+      // fetch("./products.json")
+      // realdata from database
+      fetch(
+         `https://pure-escarpment-22232.herokuapp.com/products?page=${page}&&size=${size}`
+      )
          .then((res) => res.json())
          .then((data) => {
-            setProducts(data);
-            setDisplayProducts(data);
+            setProducts(data.products);
+            setSearchProducts(data.products);
+            const count = data.count;
+            const pageNumber = Math.ceil(count / size);
+            setPageCount(pageNumber);
          });
-   }, []);
+   }, [page]);
 
    const handleAddToCart = (product) => {
       const exists = cart.find((pd) => pd.key === product.key);
@@ -44,7 +55,7 @@ const Shop = () => {
          product.name.toLowerCase().includes(searchText.toLowerCase())
       );
 
-      setDisplayProducts(matchedProducts);
+      setSearchProducts(matchedProducts);
    };
 
    return (
@@ -58,13 +69,26 @@ const Shop = () => {
          </div>
          <div className="shop-container">
             <div className="product-container">
-               {displayProducts.map((product) => (
+               {searchProducts.map((product) => (
                   <Product
                      key={product.key}
                      product={product}
                      handleAddToCart={handleAddToCart}
                   ></Product>
                ))}
+
+               {/* pagination  */}
+               <div className="pagination">
+                  {[...Array(pageCount).keys()].map((number) => (
+                     <button
+                        className={number === page ? "selected" : ""}
+                        key={number}
+                        onClick={() => setPage(number)}
+                     >
+                        {number + 1}
+                     </button>
+                  ))}
+               </div>
             </div>
             <div className="cart-container">
                <Cart cart={cart}>
